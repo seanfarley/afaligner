@@ -82,8 +82,8 @@ def FastDTWBD(s, t, skip_penalty, radius=0):
 def _coarse_seq(seq):
     even = seq[::2, :]
     odd = seq[1::2, :]
-    l = len(seq) // 2
-    return (even[:l] + odd[:l]) / 2
+    k = len(seq) // 2
+    return (even[:k] + odd[:k]) / 2
 
 
 def _get_window(path, radius, n, m):
