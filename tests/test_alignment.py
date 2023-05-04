@@ -1,5 +1,5 @@
-from datetime import timedelta
 import os
+from datetime import timedelta
 
 from afaligner import align
 
@@ -18,21 +18,17 @@ def test_text_extra_head():
     Text starts with extra lines. Ensure that those are skipped.
     """
     sync_map = align(
-        os.path.join(RESOURCES_DIR, 'shakespeare/text_extra_head/'),
-        os.path.join(RESOURCES_DIR, 'shakespeare/audio/'),
-        times_as_timedelta=True
+        os.path.join(RESOURCES_DIR, "shakespeare/text_extra_head/"),
+        os.path.join(RESOURCES_DIR, "shakespeare/audio/"),
+        times_as_timedelta=True,
     )
-    text = 'p001.xhtml'
-    last_extra_line_id = 'f0005'
+    text = "p001.xhtml"
+    last_extra_line_id = "f0005"
     audio_starts_before = timedelta(seconds=3)
-    
-    # The last extra line should not be mapped at all or mapped before audio starts
+
+    # The last extra line should not be mapped at all or mapped before audio
+    # starts
     assert (
-        last_extra_line_id not in sync_map[text] or
-        sync_map[text][last_extra_line_id]['end_time'] < audio_starts_before
+        last_extra_line_id not in sync_map[text]
+        or sync_map[text][last_extra_line_id]["end_time"] < audio_starts_before
     )
-
-
-    
-
-

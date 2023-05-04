@@ -7,23 +7,25 @@ from distutils.command.build_ext import build_ext as _build_ext
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
-class CTypesLibrary(Extension): pass
+class CTypesLibrary(Extension):
+    pass
 
 
 class build_ext(_build_ext):
     """
-    Since compiled C code imported as shared library using ctypes, it is neccessary to know its name.
-    Therefore, get_ext_filename is overridden to return platform-independent name.
-    See https://stackoverflow.com/questions/4529555/building-a-ctypes-based-c-library-with-distutils
+    Since compiled C code imported as shared library using ctypes, it is
+    neccessary to know its name. Therefore, get_ext_filename is overridden to
+    return platform-independent name. See
+    https://stackoverflow.com/questions/4529555/building-a-ctypes-based-c-library-with-distutils
     """
     def build_extension(self, ext):
         self._ctypes = isinstance(ext, CTypesLibrary)
         return super().build_extension(ext)
 
     def get_ext_filename(self, ext_name):
-        # If you are going to use setuptools' build_ext:
-        # setuptools' build_ext calls get_ext_filename() once before build_extension():
-        # It's in finalize_options(), and the name doesn't seem to matter.
+        # If you are going to use setuptools' build_ext: setuptools' build_ext
+        # calls get_ext_filename() once before build_extension(). It's in
+        # finalize_options(), and the name doesn't seem to matter.
         if getattr(self, '_ctypes', False):
             return os.path.join(*ext_name.split('.')) + '.so'
         return super().get_ext_filename(ext_name)
@@ -39,7 +41,7 @@ setup(
     url='https://github.com/r4victor/afaligner',
     author='Victor Skvortsov',
     author_email='vds003@gmail.com',
-    description='A forced aligner intended for synchronization of narrated text',
+    description='A forced aligner intended for synchronizing narrated text',
     long_description=long_description,
     long_description_content_type='text/markdown',
     license='MIT',
