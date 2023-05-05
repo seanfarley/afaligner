@@ -1,14 +1,13 @@
 import os
 
-from setuptools import setup
-from setuptools.extension import Library
+from distutils.core import setup, Extension
 from distutils.command.build_ext import build_ext as _build_ext
 
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
-class CTypesLibrary(Library): pass
+class CTypesLibrary(Extension): pass
 
 
 class build_ext(_build_ext):
