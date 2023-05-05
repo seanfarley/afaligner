@@ -59,14 +59,14 @@ Or if you want to modify the <b>afaligner</b>'s source code:
 
 ## Running tests
 
-1. Install `pytest`:
+1. Install `pytest` and other dependencies:
    ```
-   pip install pytest
+   pip install -r requirements/dev.txt
    ```
 
 2. Run tests:
    ```
-   python -m pytest tests/
+   python -m pytest
    ```
 
 ## Installation via Docker

@@ -34,6 +34,8 @@ class build_ext(_build_ext):
 with open(os.path.join(BASE_DIR, 'README.md'), 'r') as f:
     long_description = f.read()
 
+with open(os.path.join(BASE_DIR, 'requirements/base.txt'), 'r') as f:
+    requirements = f.read().splitlines()
 
 setup(
     name='afaligner',
@@ -63,10 +65,7 @@ setup(
     packages=['afaligner'],
     package_dir={'': 'src'},
     package_data={'afaligner': ['templates/*']},
-    install_requires=[
-        'aeneas>=1.7.3.0',
-        'Jinja2>=3.1.2',
-    ],
+    install_requires=requirements,
     ext_modules=[CTypesLibrary(
         'afaligner.c_modules.dtwbd',
         sources=['src/afaligner/c_modules/dtwbd.c']

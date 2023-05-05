@@ -1,0 +1,5 @@
+# should include all dependencies required to build and run afaligner (i.e.
+# doesn't include tests or helpful dev dependencies)
+numpy>=1.24
+aeneas>=1.7.3.0
+Jinja2>=3.1.2
