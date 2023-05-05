@@ -170,19 +170,26 @@ size_t *get_window(size_t n, size_t m, size_t *path_buffer, size_t path_len, int
 
 
 void update_window(size_t *window, size_t n, size_t m, ssize_t i, ssize_t j) {
-    if (i < 0 || i >= n) return;
+    if (i < 0) return;
 
     if (j < 0) {
         j = 0;
     }
-    if (j > m - 1) {
-        j = m - 1;
+
+    // recast as unsigned
+    size_t ii = (size_t)i;
+    size_t jj = (size_t)j;
+
+    if (ii >= n) return;
+
+    if (jj > m - 1) {
+        jj = m - 1;
     }
-    if (j < window[2*i]) {
-        window[2*i] = j;
+    if (jj < window[2*ii]) {
+        window[2*i] = jj;
     }
-    if (j >= window[2*i+1]) {
-        window[2*i+1] = j + 1;
+    if (jj >= window[2*ii+1]) {
+        window[2*ii+1] = jj + 1;
     }
 }
 
