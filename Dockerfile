@@ -6,14 +6,13 @@ RUN apt update -q \
     ffmpeg
 RUN apt install -yq gcc
 
-RUN pip install numpy==1.23.4
-RUN pip install pytest==7.1.3
-
 WORKDIR /afaligner
 COPY src src
 COPY tests tests
+COPY requirements requirements
 COPY LICENSE MANIFEST.in README.md setup.py ./
 
+RUN pip install $(grep numpy requirements/base.txt)
 RUN pip install .
 
 WORKDIR /
