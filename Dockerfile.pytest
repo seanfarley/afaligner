@@ -1,0 +1,10 @@
+FROM afaligner
+
+WORKDIR /afaligner
+COPY setup.cfg .
+
+# install testing dependencies
+RUN pip install -r requirements/test.txt
+
+ENTRYPOINT []
+CMD ["python", "-m", "pytest"]
